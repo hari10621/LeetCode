@@ -30,3 +30,36 @@ public:
         return result;
     }
 };
+
+
+class Solution {
+public:
+    void bfs(TreeNode* root,vector<vector<int>>& result){
+        if(root == nullptr){
+            return;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int level = q.size();
+            vector<int> current;
+            for(int i=0;i<level;i++){
+                TreeNode* curr = q.front();
+                q.pop();
+                current.push_back(curr->val);
+                if(curr->left != nullptr){
+                    q.push(curr->left);
+                }
+                if(curr->right != nullptr){
+                    q.push(curr->right);
+                }
+            }
+            result.push_back(current);
+        }
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> result;
+        bfs(root,result);
+        return result;
+    }
+};
